@@ -1,0 +1,23 @@
+{
+  "name": "mongo-chat",
+  "version": "1.0.0",
+  "description": "Basic chat app using MongoDB and Express.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haramrit09k/mongo-chat.git"
+  },
+  "author": "haramrit09k",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haramrit09k/mongo-chat/issues"
+  },
+  "homepage": "https://github.com/haramrit09k/mongo-chat#readme",
+  "dependencies": {
+    "mongodb": "^3.6.4",
+    "socket.io": "^3.1.1"
+  }
+}
