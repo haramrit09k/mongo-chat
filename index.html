@@ -65,9 +65,9 @@
                     }, 5000);
                 }
             }
-
+            var url = 'https://mangochat.herokuapp.com/' || 'http://localhost:4242';
             // establish socket connection
-            var socket = io('http://localhost:4242', {
+            var socket = io(url, {
                 withCredentials: true,
             });
 

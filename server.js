@@ -65,14 +65,15 @@ mongo.connect(uri, function(err, db){
         socket.on('input', function(data){
             let name = data.name;
             let msg = data.message;
-
+            console.log(name+": "+msg);
             if(name == '' || msg == ''){
                 sendStatus('Name or message missing!');
             }
             else{
+                // insert chat in collection
                 chat.insertOne({name: name, msg: msg}, function(){
+                   // emit messages to all users
                     client.emit('messages', [data]);
-
                     sendStatus({
                         message: 'Message successfully sent',
                         clear: true
