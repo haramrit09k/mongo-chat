@@ -17,7 +17,6 @@ console.debug('Server listening on port ' + port);
 
 // setup mongo and socket.io
 const mongo = require('mongodb').MongoClient;
-const e = require('express');
 const client = require('socket.io')(server);
 
 if(process.env.NODE_ENV === "production"){
