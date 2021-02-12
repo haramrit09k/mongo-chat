@@ -17,8 +17,15 @@ console.debug('Server listening on port ' + port);
 
 // setup mongo and socket.io
 const mongo = require('mongodb').MongoClient;
+const e = require('express');
 const client = require('socket.io')(server);
-const uri = process.env.MONGODB_URI;
+
+if(process.env.NODE_ENV === "production"){
+    var uri = process.env.MONGODB_URI;
+}
+else{
+    var uri = "mongodb://127.0.0.1/mangochat-messages";
+}
 
 // mongo connection
 mongo.connect(uri, function(err, db){
