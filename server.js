@@ -17,7 +17,14 @@ console.debug('Server listening on port ' + port);
 
 // setup mongo and socket.io
 const mongo = require('mongodb').MongoClient;
-const client = require('socket.io')(server);
+const client = require('socket.io')(server, {
+    cors: {
+      origin: "http://localhost:4242",
+      methods: ["GET", "POST"],
+      credentials: true,
+      transports: ['websocket', 'polling'],
+    }  
+});
 
 if(process.env.NODE_ENV === "production"){
     var uri = process.env.MONGODB_URI;
@@ -38,7 +45,8 @@ mongo.connect(uri, function(err, db){
 
     // connection to socket.io
     client.on('connection', function(socket){
-        let chat = db.collection('chats');
+        let mangochat = db.db('mangochat-messages');
+        let chat = mangochat.collection('chat');
 
         // send status across n/w
         sendStatus = function(s) {
@@ -62,7 +70,7 @@ mongo.connect(uri, function(err, db){
                 sendStatus('Name or message missing!');
             }
             else{
-                chat.insert({name: name, msg: msg}, function(){
+                chat.insertOne({name: name, msg: msg}, function(){
                     client.emit('messages', [data]);
 
                     sendStatus({
@@ -74,7 +82,7 @@ mongo.connect(uri, function(err, db){
         });
 
         socket.on('clear', function(data){
-            chat.remove({}, function(){
+            chat.drop(function(){
                 socket.emit('cleared');
             })
         });
