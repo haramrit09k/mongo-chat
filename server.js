@@ -1,5 +1,23 @@
+// set up basic express routing
+const http = require('http');
+const express = require('express');
+const path = require('path');
+const app = express();
+app.use(express.json());
+app.use(express.static("express"));
+// default URL for website
+app.use('/', function(req,res){
+    res.sendFile(path.join(__dirname+'/index.html'));
+    //__dirname : It will resolve to your project folder.
+  });
+const server = http.createServer(app);
+const port = process.env.PORT || 4242;
+server.listen(port);
+console.debug('Server listening on port ' + port);
+
+// setup mongo and socket.io
 const mongo = require('mongodb').MongoClient;
-const client = require('socket.io')(4242);
+const client = require('socket.io')(server);
 
 // mongo connection
 mongo.connect("mongodb://127.0.0.1/mongo-chat", function(err, db){

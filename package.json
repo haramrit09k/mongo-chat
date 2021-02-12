@@ -17,7 +17,12 @@
   },
   "homepage": "https://github.com/haramrit09k/mongo-chat#readme",
   "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.1-security",
     "mongodb": "^3.6.4",
     "socket.io": "^3.1.1"
-  }
+  },
+  "engines": {
+    "node": "v12.18.4"
+}
 }
