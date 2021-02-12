@@ -64,8 +64,7 @@ mongo.connect(uri, function(err, db){
 
         socket.on('input', function(data){
             let name = data.name;
-            let msg = data.message;
-            console.log(name+": "+msg);
+            let msg = data.msg;
             if(name == '' || msg == ''){
                 sendStatus('Name or message missing!');
             }
@@ -73,7 +72,7 @@ mongo.connect(uri, function(err, db){
                 // insert chat in collection
                 chat.insertOne({name: name, msg: msg}, function(){
                    // emit messages to all users
-                    client.emit('messages', [data]);
+                    client.emit('messages', {name: name, msg: msg});
                     sendStatus({
                         message: 'Message successfully sent',
                         clear: true
