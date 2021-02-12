@@ -18,15 +18,17 @@ console.debug('Server listening on port ' + port);
 // setup mongo and socket.io
 const mongo = require('mongodb').MongoClient;
 const client = require('socket.io')(server);
-const uri = "mongodb://127.0.0.1/mongo-chat" || process.env.MONGODB_URI;
+const uri = "mongodb://localhost/mongo-chat" || process.env.MONGODB_URI;
 
 // mongo connection
-mongo.connect(uri, function(err, db){
+mongo.connect("mongodb://localhost", function(err, db){
     if(err){
         throw err;
     }
-
-    console.log("Connection to DB established!");
+    else{
+        console.log("Connection to DB established!");
+        console.log(uri);
+    }
 
     // connection to socket.io
     client.on('connection', function(socket){
