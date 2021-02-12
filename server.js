@@ -18,7 +18,7 @@ console.debug('Server listening on port ' + port);
 // setup mongo and socket.io
 const mongo = require('mongodb').MongoClient;
 const client = require('socket.io')(server);
-const uri = "mongodb://localhost/mangochat-messages" || process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI;
 
 // mongo connection
 mongo.connect(uri, function(err, db){
